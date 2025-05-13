@@ -8,8 +8,7 @@ import '../../flutter_zxing.dart';
 class WriterWidget extends StatefulWidget {
   const WriterWidget({
     super.key,
-    this.text,
-    this.format = Format.qrCode,
+    required this.text,
     this.height = 120, // Width is calculated from height and format ratio
     this.margin = 0,
     this.eccLevel = EccLevel.low,
@@ -18,7 +17,7 @@ class WriterWidget extends StatefulWidget {
     this.onError,
   });
 
-  final String? text;
+  final String text;
   final int format;
   final int height;
   final int margin;
@@ -56,9 +55,9 @@ class _WriterWidgetState extends State<WriterWidget>
 
   @override
   void initState() {
-    _codeFormat = widget.format;
+    _codeFormat = Format.dataMatrix;
     _eccLevel = widget.eccLevel;
-    _textController.text = widget.text ?? _codeFormat.demoText;
+    _textController.text = widget.text;
     _widthController.text =
         (widget.height * _codeFormat.ratio).round().toString();
     _heightController.text = widget.height.toString();
@@ -88,86 +87,6 @@ class _WriterWidgetState extends State<WriterWidget>
             children: <Widget>[
               const SizedBox(height: 20),
               // Input multiline text
-              TextFormField(
-                controller: _textController,
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                maxLength: _codeFormat.maxTextLength,
-                onChanged: (String value) {
-                  setState(() {});
-                },
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  filled: true,
-                  labelText: messages.textLabel,
-                  counterText:
-                      '${_textController.value.text.length} / ${_codeFormat.maxTextLength}',
-                ),
-                validator: (String? value) {
-                  if (value?.isEmpty ?? false) {
-                    return messages.invalidText;
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 20),
-              // Format DropDown button
-              Row(
-                children: <Widget>[
-                  Flexible(
-                    child: DropdownButtonFormField<int>(
-                      value: _codeFormat,
-                      decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
-                        filled: true,
-                        labelText: messages.formatLabel,
-                      ),
-                      items: _supportedFormats
-                          .map((int format) => DropdownMenuItem<int>(
-                                value: format,
-                                child: Text(zx.barcodeFormatName(format)),
-                              ))
-                          .toList(),
-                      onChanged: (int? format) {
-                        setState(() {
-                          _codeFormat = format ?? Format.qrCode;
-                          _textController.text = _codeFormat.demoText;
-                          _heightController.text = widget.height.toString();
-                          _widthController.text =
-                              (widget.height * _codeFormat.ratio)
-                                  .round()
-                                  .toString();
-                        });
-                      },
-                    ),
-                  ),
-                  if (_codeFormat.isSupportedEccLevel) ...<Widget>[
-                    const SizedBox(width: 6),
-                    Flexible(
-                      child: DropdownButtonFormField<EccLevel>(
-                        value: _eccLevel,
-                        decoration: InputDecoration(
-                          border: const OutlineInputBorder(),
-                          filled: true,
-                          labelText: messages.eccLevelLabel,
-                        ),
-                        items: _eccTitlesMap.entries
-                            .map((MapEntry<EccLevel, String> entry) =>
-                                DropdownMenuItem<EccLevel>(
-                                  value: entry.key,
-                                  child: Text(entry.value),
-                                ))
-                            .toList(),
-                        onChanged: (EccLevel? ecc) {
-                          setState(() {
-                            _eccLevel = ecc ?? EccLevel.low;
-                          });
-                        },
-                      ),
-                    ),
-                  ]
-                ],
-              ),
               const SizedBox(height: 20),
               Row(
                 children: <Widget>[
