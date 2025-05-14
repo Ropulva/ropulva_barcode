@@ -1,4 +1,4 @@
-name: flutter_zxing
+name: ropulva_barcode
 description: A barcode scanner and generator natively in Flutter with Dart FFI based on ZXing.
 version: 2.0.0
 repository: https://github.com/khoren93/flutter_zxing
