@@ -14,6 +14,7 @@ class WriterWidget extends StatefulWidget {
     required this.marginDecoration,
     required this.buttonStyle,
     required this.buttonChild,
+    this.format = Format.qrCode,
     this.height = 120, // Width is calculated from height and format ratio
     this.margin = 0,
     this.eccLevel = EccLevel.low,
@@ -22,6 +23,8 @@ class WriterWidget extends StatefulWidget {
   });
 
   final String text;
+  final int format;
+  final int height;
   final int height;
   final int margin;
   final EccLevel eccLevel;
@@ -55,7 +58,7 @@ class _WriterWidgetState extends State<WriterWidget>
 
   @override
   void initState() {
-    _codeFormat = Format.dataMatrix;
+    _codeFormat = widget.format;
     _eccLevel = widget.eccLevel;
     _textController.text = widget.text;
     _widthController.text =
