@@ -7,8 +7,7 @@ C++_ZXing library is a high-performance Flutter plugin for scanning and generati
 ## Install
 
 ropulva_barcode:
-    path: ./ropulva_barcode
-
+    path: ./ropulva_barcode  
 git clone --recurse-submodules https://github.com/Ropulva/ropulva_barcode.git
 
 ---

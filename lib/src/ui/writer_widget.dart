@@ -25,7 +25,6 @@ class WriterWidget extends StatefulWidget {
   final String text;
   final int format;
   final int height;
-  final int height;
   final int margin;
   final EccLevel eccLevel;
   final InputDecoration widthDecoration;
