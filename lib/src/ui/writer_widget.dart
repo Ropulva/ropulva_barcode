@@ -23,6 +23,11 @@ class WriterWidget extends StatefulWidget {
   final int margin;
   final EccLevel eccLevel;
   final Messages messages;
+  final InputDecoration widthDecoration;
+  final InputDecoration heightDecoration;
+  final InputDecoration marginDecoration;
+  final ButtonStyle buttonStyle;
+  final Widget buttonChild;
   final Function(Encode result, Uint8List? bytes)? onSuccess;
   final Function(String error)? onError;
 
@@ -85,7 +90,6 @@ class _WriterWidgetState extends State<WriterWidget>
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              const SizedBox(height: 20),
               // Input multiline text
               const SizedBox(height: 20),
               Row(
@@ -94,9 +98,7 @@ class _WriterWidgetState extends State<WriterWidget>
                     child: TextFormField(
                       controller: _widthController,
                       keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        labelText: messages.widthLabel,
-                      ),
+                      decoration: widget.widthDecoration,
                       validator: (String? value) {
                         final int? width = int.tryParse(value ?? '');
                         if (width == null) {
@@ -115,14 +117,11 @@ class _WriterWidgetState extends State<WriterWidget>
                       },
                     ),
                   ),
-                  // const SizedBox(width: 8),
                   Flexible(
                     child: TextFormField(
                       controller: _heightController,
                       keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        labelText: messages.heightLabel,
-                      ),
+                      decoration: widget.heightDecoration,
                       validator: (String? value) {
                         final int? width = int.tryParse(value ?? '');
                         if (width == null) {
@@ -145,9 +144,7 @@ class _WriterWidgetState extends State<WriterWidget>
                     child: TextFormField(
                       controller: _marginController,
                       keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        labelText: messages.marginLabel,
-                      ),
+                      decoration: widget.marginDecoration,
                       validator: (String? value) {
                         final int? width = int.tryParse(value ?? '');
                         if (width == null) {
@@ -163,7 +160,8 @@ class _WriterWidgetState extends State<WriterWidget>
               // Write button
               ElevatedButton(
                 onPressed: createBarcode,
-                child: Text(messages.createButton),
+                child: widget.buttonChild,
+                  style: widget.buttonStyle
               ),
               const SizedBox(height: 10),
             ],
