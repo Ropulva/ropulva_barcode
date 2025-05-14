@@ -52,13 +52,6 @@ class _WriterWidgetState extends State<WriterWidget>
   int _codeFormat = Format.qrCode;
   EccLevel _eccLevel = EccLevel.low;
 
-  Messages get messages => widget.messages;
-  Map<EccLevel, String> get _eccTitlesMap => <EccLevel, String>{
-        EccLevel.low: messages.lowEccLevel,
-        EccLevel.medium: messages.mediumEccLevel,
-        EccLevel.quartile: messages.quartileEccLevel,
-        EccLevel.high: messages.highEccLevel,
-      };
 
   @override
   void initState() {
@@ -104,7 +97,7 @@ class _WriterWidgetState extends State<WriterWidget>
                       validator: (String? value) {
                         final int? width = int.tryParse(value ?? '');
                         if (width == null) {
-                          return messages.invalidWidth;
+                          return "Invalid Width";
                         }
                         return null;
                       },
@@ -127,7 +120,7 @@ class _WriterWidgetState extends State<WriterWidget>
                       validator: (String? value) {
                         final int? width = int.tryParse(value ?? '');
                         if (width == null) {
-                          return messages.invalidHeight;
+                          return "Invalid Height";
                         }
                         return null;
                       },
@@ -150,7 +143,7 @@ class _WriterWidgetState extends State<WriterWidget>
                       validator: (String? value) {
                         final int? width = int.tryParse(value ?? '');
                         if (width == null) {
-                          return messages.invalidMargin;
+                          return 'Invalid Margin';
                         }
                         return null;
                       },
