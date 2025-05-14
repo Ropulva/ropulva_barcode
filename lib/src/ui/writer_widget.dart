@@ -9,10 +9,14 @@ class WriterWidget extends StatefulWidget {
   const WriterWidget({
     super.key,
     required this.text,
+    required this.widthDecoration,
+    required this.heightDecoration,
+    required this.marginDecoration,
+    required this.buttonStyle,
+    required this.buttonChild,
     this.height = 120, // Width is calculated from height and format ratio
     this.margin = 0,
     this.eccLevel = EccLevel.low,
-    this.messages = const Messages(),
     this.onSuccess,
     this.onError,
   });
