@@ -97,7 +97,7 @@ class _WriterWidgetState extends State<WriterWidget>
                       validator: (String? value) {
                         final int? width = int.tryParse(value ?? '');
                         if (width == null) {
-                          return "Invalid Width";
+                          return "Invalid width";
                         }
                         return null;
                       },
@@ -120,7 +120,7 @@ class _WriterWidgetState extends State<WriterWidget>
                       validator: (String? value) {
                         final int? width = int.tryParse(value ?? '');
                         if (width == null) {
-                          return "Invalid Height";
+                          return "Invalid height";
                         }
                         return null;
                       },
@@ -143,7 +143,7 @@ class _WriterWidgetState extends State<WriterWidget>
                       validator: (String? value) {
                         final int? width = int.tryParse(value ?? '');
                         if (width == null) {
-                          return 'Invalid Margin';
+                          return 'Invalid margin';
                         }
                         return null;
                       },
